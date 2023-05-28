@@ -6,25 +6,25 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      monsters: [
-        {
-          name: "Linda",
-          id: "12345a",
-        },
-        {
-          name: "Frank",
-          id: "12356ta",
-        },
-        {
-          name: "Jacky",
-          id: "1xdh6a",
-        },
-        {
-          name: "Natassa",
-          id: "89u45a",
-        },
-      ],
+      monsters: [],
     };
+  }
+
+  // helps making Api request
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      // now this become a promise(response)
+      .then((response) => response.json())
+      .then((users) =>
+        this.setState(
+          () => {
+            return { monsters: users };
+          },
+          () => {
+            console.log(this.state);
+          }
+        )
+      );
   }
   render() {
     return (
